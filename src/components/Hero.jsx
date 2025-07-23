@@ -1,5 +1,6 @@
 import Logo from "../assets/Size=Large, Type=Default.svg";
 import phoneImage from "../assets/phone.avif";
+
 export default function Hero() {
   return (
     <section className="relative h-screen flex flex-col md:flex-row items-center justify-between bg-black text-white px-6 md:px-20 overflow-hidden">
@@ -16,7 +17,7 @@ export default function Hero() {
             Una experiencia bancaria segura, simple y moderna. Abre tu cuenta en
             minutos.
           </p>
-          <button className="mt-8 px-6 py-3 bg-primary-300 hover:bg-primary-200 text-black font-semibold rounded-xl transition duration-300">
+          <button className="mt-8 px-6 py-3 bg-primary-400 hover:bg-primary-300 text-black font-semibold rounded-xl transition duration-300">
             Hazte cliente
           </button>
         </div>
