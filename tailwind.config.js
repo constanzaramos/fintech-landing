@@ -5,7 +5,6 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {
       extend: {
   colors: {
     primary: {
@@ -55,7 +54,7 @@ export default {
       fontFamily: {
         sans: ['"Open Sans"', 'sans-serif'],
       },
-    },
+    
   },
   plugins: [],
 }
