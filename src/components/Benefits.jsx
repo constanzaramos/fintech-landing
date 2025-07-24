@@ -5,21 +5,25 @@ import { benefits } from "../data/benefitsData";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Benefits() {
-  const [selected, setSelected] = useState(null);
-  const [cardRect, setCardRect] = useState(null);
+  const [selectedIndex, setSelectedIndex] = useState(null);
   const cardRefs = useRef([]);
+  const [cardRect, setCardRect] = useState(null);
+
+  const selected = selectedIndex !== null ? benefits[selectedIndex] : null;
 
   useLayoutEffect(() => {
-    if (selected !== null) {
-      const rect = cardRefs.current[selected.index]?.getBoundingClientRect();
+    if (selectedIndex !== null) {
+      const rect = cardRefs.current[selectedIndex]?.getBoundingClientRect();
       setCardRect(rect);
     }
-  }, [selected]);
+  }, [selectedIndex]);
+
+  const closeModal = () => setSelectedIndex(null);
 
   return (
     <section className="bg-black py-16">
       <div className="max-w-7xl mx-auto px-6">
-        <h2 className="text-3xl font-normal font-graphie text-white mb-10 text-center">
+        <h2 className="text-3xl font-bold font-sans text-white mb-10 text-left">
           Beneficios exclusivos para ti
         </h2>
 
@@ -28,22 +32,32 @@ export default function Benefits() {
             <div
               key={index}
               ref={(el) => (cardRefs.current[index] = el)}
-              onClick={() => setSelected({ ...item, index })}
-              className={`relative bg-neutral-800 border border-gray-200 rounded-xl shadow-xl p-6 hover:scale-[1.02] cursor-pointer transition-transform duration-300 ${
-                selected?.index === index ? "invisible" : ""
+              onClick={() => setSelectedIndex(index)}
+              className={`relative rounded-xl shadow-xl cursor-pointer overflow-hidden transition-transform duration-300 hover:scale-[1.02] ${
+                selectedIndex === index ? "invisible" : ""
               }`}
+              style={{
+                backgroundImage: `url(${item.image})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                height: "220px",
+              }}
             >
-              <div className="flex items-center justify-between mb-4">
-                <img
-                  src={item.logo}
-                  alt={`Logo ${item.title}`}
-                  className="h-16 w-28 object-contain"
-                />
-                <div className="ml-4">{item.icon}</div>
+              {/* Capa oscura encima de la imagen */}
+              <div className="absolute inset-0 bg-black/80 z-0" />
+
+              {/* Contenido */}
+              <div className="relative z-10 p-6 h-full flex flex-col justify-end">
+                <div className="flex items-center justify-between mb-2">
+                  <img
+                    src={item.logo}
+                    alt={`Logo ${item.title}`}
+                    className="h-10 w-auto object-contain"
+                  />
+                  <div className="ml-4">{item.icon}</div>
+                </div>
+                <h3 className="text-xl font-bold text-primary-50">{item.title}</h3>
               </div>
-              <h3 className="text-xl font-bold text-primary-400">
-                {item.title}
-              </h3>
             </div>
           ))}
         </div>
@@ -55,7 +69,7 @@ export default function Benefits() {
             {/* Fondo oscuro */}
             <motion.div
               className="fixed inset-0 bg-black/70 z-40"
-              onClick={() => setSelected(null)}
+              onClick={closeModal}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -63,7 +77,7 @@ export default function Benefits() {
 
             {/* Modal animado desde la card */}
             <motion.div
-              className="fixed z-50 bg-white shadow-2xl overflow-hidden rounded-2xl"
+              className="fixed z-50 bg-neutral-900 shadow-2xl overflow-hidden rounded-2xl"
               initial={{
                 top: cardRect.top,
                 left: cardRect.left,
@@ -92,21 +106,17 @@ export default function Benefits() {
               }}
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
             >
-              <div className="relative px-0 pt-6 pb-4 h-full flex flex-col justify-between">
-    
+              <div className="h-full flex flex-col justify-between pb-8">
                 <img
                   src={selected.image}
                   alt="Imagen beneficio"
                   className="w-full h-[180px] object-cover"
                 />
-               
                 <div className="px-6">
                   <h3 className="text-base font-bold text-primary-500 mb-1">
                     {selected.title}
                   </h3>
-                  <p className="text-sm text-neutral-700">
-                    {selected.description}
-                  </p>
+                  <p className="text-sm text-white">{selected.description}</p>
                 </div>
               </div>
             </motion.div>
