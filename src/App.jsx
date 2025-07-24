@@ -3,6 +3,7 @@ import Hero from "./components/Hero";
 import Benefits from "./components/Benefits";
 import Footer from "./components/Footer";
 import Banner from "./components/Banner";
+import EmergencyHelp from "./components/EmergencyHelp";
 function App() {
   return (
     <>
@@ -10,6 +11,7 @@ function App() {
         <Benefits />
         <Banner />
         <Footer />
+        <EmergencyHelp />
     </>
   );
 }

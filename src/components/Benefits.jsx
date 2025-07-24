@@ -54,7 +54,9 @@ export default function Benefits() {
                   />
                   <div className="ml-4">{item.icon}</div>
                 </div>
-                <h3 className="text-xl font-bold text-primary-50">{item.title}</h3>
+                <h3 className="text-xl font-bold text-primary-50">
+                  {item.title}
+                </h3>
               </div>
             </div>
           ))}
