@@ -1,27 +1,46 @@
 "use client";
 
-import { useState, useRef, useLayoutEffect } from "react";
+import { useState, useRef, useLayoutEffect, useMemo } from "react";
 import { benefits } from "../data/benefitsData";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, useInView } from "framer-motion";
+import BenefitModal from "./BenefitModal";
+import React from "react";
 
 export default function Benefits() {
   const [selectedIndex, setSelectedIndex] = useState(null);
-  const cardRefs = useRef([]);
+  const sectionRef = useRef(null);
+  const cardRefs = useMemo(() => benefits.map(() => React.createRef()), []);
   const [cardRect, setCardRect] = useState(null);
 
   const selected = selectedIndex !== null ? benefits[selectedIndex] : null;
+  const isInView = useInView(sectionRef, { margin: "-100px", amount: "some" });
 
   useLayoutEffect(() => {
-    if (selectedIndex !== null) {
-      const rect = cardRefs.current[selectedIndex]?.getBoundingClientRect();
+    if (selectedIndex !== null && cardRefs[selectedIndex]?.current) {
+      const rect = cardRefs[selectedIndex].current.getBoundingClientRect();
       setCardRect(rect);
     }
   }, [selectedIndex]);
 
+  useLayoutEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") closeModal();
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
+  useLayoutEffect(() => {
+    if (!isInView && selectedIndex !== null) {
+      setSelectedIndex(null);
+    }
+  }, [isInView]);
+
   const closeModal = () => setSelectedIndex(null);
 
   return (
-    <section className="bg-black py-16">
+    <section ref={sectionRef} className="bg-black py-16">
       <div className="max-w-7xl mx-auto px-6">
         <h2 className="text-3xl font-bold font-sans text-white mb-10 text-left">
           Beneficios exclusivos para ti
@@ -31,7 +50,7 @@ export default function Benefits() {
           {benefits.map((item, index) => (
             <div
               key={index}
-              ref={(el) => (cardRefs.current[index] = el)}
+              ref={cardRefs[index]}
               onClick={() => setSelectedIndex(index)}
               className={`relative rounded-xl shadow-xl cursor-pointer overflow-hidden transition-transform duration-300 hover:scale-[1.02] ${
                 selectedIndex === index ? "invisible" : ""
@@ -51,6 +70,7 @@ export default function Benefits() {
                     src={item.logo}
                     alt={`Logo ${item.title}`}
                     className="h-10 w-auto object-contain"
+                    loading="lazy"
                   />
                   <div className="ml-4">{item.icon}</div>
                 </div>
@@ -64,62 +84,11 @@ export default function Benefits() {
       </div>
 
       <AnimatePresence>
-        {selected && cardRect && (
-          <>
-            <motion.div
-              className="fixed inset-0 bg-black/70 z-40"
-              onClick={closeModal}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-            />
-
-            <motion.div
-              className="fixed z-50 bg-neutral-900 shadow-2xl overflow-hidden rounded-2xl"
-              initial={{
-                top: cardRect.top,
-                left: cardRect.left,
-                width: cardRect.width,
-                height: cardRect.height,
-                scale: 1,
-              }}
-              animate={{
-                top: "50%",
-                left: "50%",
-                x: "-50%",
-                y: "-50%",
-                width: "90%",
-                maxWidth: 500,
-                height: 300,
-                scale: 1,
-              }}
-              exit={{
-                top: cardRect.top,
-                left: cardRect.left,
-                width: cardRect.width,
-                height: cardRect.height,
-                x: 0,
-                y: 0,
-                scale: 1,
-              }}
-              transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            >
-              <div className="h-full flex flex-col justify-between pb-8">
-                <img
-                  src={selected.image}
-                  alt="Imagen beneficio"
-                  className="w-full h-[180px] object-cover"
-                />
-                <div className="px-6">
-                  <h3 className="text-base font-bold text-primary-500 mb-1">
-                    {selected.title}
-                  </h3>
-                  <p className="text-sm text-white">{selected.description}</p>
-                </div>
-              </div>
-            </motion.div>
-          </>
-        )}
+        <BenefitModal
+          selected={selected}
+          cardRect={cardRect}
+          closeModal={closeModal}
+        />
       </AnimatePresence>
     </section>
   );
