@@ -43,10 +43,8 @@ export default function Benefits() {
                 height: "220px",
               }}
             >
-              {/* Capa oscura encima de la imagen */}
               <div className="absolute inset-0 bg-black/80 z-0" />
 
-              {/* Contenido */}
               <div className="relative z-10 p-6 h-full flex flex-col justify-end">
                 <div className="flex items-center justify-between mb-2">
                   <img
@@ -66,7 +64,6 @@ export default function Benefits() {
       <AnimatePresence>
         {selected && cardRect && (
           <>
-            {/* Fondo oscuro */}
             <motion.div
               className="fixed inset-0 bg-black/70 z-40"
               onClick={closeModal}
@@ -75,7 +72,6 @@ export default function Benefits() {
               exit={{ opacity: 0 }}
             />
 
-            {/* Modal animado desde la card */}
             <motion.div
               className="fixed z-50 bg-neutral-900 shadow-2xl overflow-hidden rounded-2xl"
               initial={{

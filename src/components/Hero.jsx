@@ -1,5 +1,12 @@
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+"use client";
+
+import { useRef, useState } from "react";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  AnimatePresence,
+} from "framer-motion";
 
 import phoneImage from "../assets/phone.avif";
 import cardImage from "../assets/tenpo-card.avif";
@@ -7,6 +14,7 @@ import creditCardImage from "../assets/tenpo-black.png";
 import tenpoLogo from "../assets/Size=Large, Type=Default.svg";
 import cardSavingsImage from "../assets/tenpo-savings.avif";
 import logoNegative from "../assets/Size=XL, Type=Negative.svg";
+import qrImage from "../assets/qr.png";
 
 export default function Hero() {
   const sectionRef = useRef(null);
@@ -14,6 +22,8 @@ export default function Hero() {
     target: sectionRef,
     offset: ["start start", "end start"],
   });
+
+  const [showModal, setShowModal] = useState(false);
 
   const y = useTransform(scrollYProgress, [0, 1], [0, 180]);
   const rotate = useTransform(scrollYProgress, [0, 1], [0, 30]);
@@ -69,6 +79,7 @@ export default function Hero() {
           </motion.p>
 
           <motion.button
+            onClick={() => setShowModal(true)}
             className="mt-6 px-6 py-3 bg-primary-400 hover:bg-primary-300 text-black font-semibold rounded-xl transition duration-300"
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -142,6 +153,43 @@ export default function Hero() {
           />
         </div>
       </div>
+
+      <AnimatePresence>
+        {showModal && (
+          <motion.div
+            className="fixed inset-0 bg-black/60 flex items-center justify-center z-50"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <motion.div
+              className="bg-white text-black p-8 rounded-2xl w-full max-w-md text-center relative shadow-xl"
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <button
+                onClick={() => setShowModal(false)}
+                className="absolute top-3 right-3 text-black text-xl font-bold"
+              >
+                ×
+              </button>
+              <h2 className="text-2xl font-bold mb-4">¡Hazte Cliente!</h2>
+              <p className="mb-4">
+                Tenpo es una cuenta digital, costo $0
+                <br />
+                ¡Escanea este código QR y descárgala!
+              </p>
+              <img
+                src={qrImage}
+                alt="QR descarga app Tenpo"
+                className="w-40 mx-auto mt-2"
+              />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
