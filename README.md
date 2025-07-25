@@ -29,7 +29,7 @@ Este proyecto usa **Vite** para un arranque más rápido y eficiente.
 |-------------------|---------------------------------------------------------|
 | **React**         | Framework principal para construir la UI               |
 | **Vite**          | Entorno de desarrollo moderno y veloz                  |
-| **Tailwind CSS**  | Framework de estilos utilitarios                       |
+| **Tailwind CSS**  | Framework de estilos                                   |
 | **Framer Motion** | Animaciones en scroll, entradas y modales              |
 | **React Icons**   | Íconos vectoriales                                     |
 
@@ -37,7 +37,7 @@ Este proyecto usa **Vite** para un arranque más rápido y eficiente.
 
 ## 🎨 Decisiones de diseño
 
-- **Visual storytelling**: El diseño comunica el valor de Tenpo desde el primer vistazo.
+- **Visual storytelling**: El diseño comunica la estética de Tenpo a primera vista.
 - **Animaciones scroll-parallax**: Agregan dinamismo sin sobrecargar la experiencia.
 - **Modal desde tarjeta**: El modal se expande desde la tarjeta para reforzar la interacción directa.
 - **Soporte visible**: El botón flotante de ayuda refleja accesibilidad y asistencia digital.
