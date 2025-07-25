@@ -1,4 +1,4 @@
-# 🏦 Landing Page para Tenpo
+#  💸Landing Page para Tenpo
 
 Este proyecto es una landing page animada y responsiva diseñada para **Tenpo**.
 <img src="./public/hero.png" alt="Fintech Landing" />
