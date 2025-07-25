@@ -1,12 +1,60 @@
-# React + Vite
+# 🏦 Landing Page para Tenpo
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este proyecto es una landing page animada y responsiva diseñada para **Tenpo**.
+<img src="./public/hero.png" alt="Fintech Landing" />
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🔗 **Ver demo online**  
+👉 [https://fintech-landing-xi.vercel.app](https://fintech-landing-xi.vercel.app)
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🚀 Cómo correr el proyecto en local
+
+Si quieres probarlo localmente, sigue estos pasos:
+
+```bash
+git clone https://github.com/tu-usuario/fintech-landing.git
+cd fintech-landing
+npm install
+npm run dev
+Abre [http://localhost:5173](http://localhost:5173) y ya puedes verlo andando.
+
+Este proyecto usa **Vite** para un arranque más rápido y eficiente.
+
+## 🔧 Herramientas y librerías utilizadas
+
+| Herramienta       | Uso principal                                           |
+|-------------------|---------------------------------------------------------|
+| **React**         | Framework principal para construir la UI               |
+| **Vite**          | Entorno de desarrollo moderno y veloz                  |
+| **Tailwind CSS**  | Framework de estilos utilitarios                       |
+| **Framer Motion** | Animaciones en scroll, entradas y modales              |
+| **React Icons**   | Íconos vectoriales                                     |
+
+---
+
+## 🎨 Decisiones de diseño
+
+- **Visual storytelling**: El diseño comunica el valor de Tenpo desde el primer vistazo.
+- **Animaciones scroll-parallax**: Agregan dinamismo sin sobrecargar la experiencia.
+- **Modal desde tarjeta**: El modal se expande desde la tarjeta para reforzar la interacción directa.
+- **Soporte visible**: El botón flotante de ayuda refleja accesibilidad y asistencia digital.
+- **Mobile-first**: Todo el diseño fue creado desde mobile hacia desktop.
+
+---
+
+## 📁 Estructura del proyecto
+
+src/
+├── assets/ 
+├── components/ 
+├── data/
+├── App.jsx 
+└── main.jsx 
+
+## 🙋‍♀️ Desarrollado por
+
+**Constanza Ramos**  
+Frontend Developer | Marketing Digital 
+📫 [https://www.linkedin.com/in/constanzaramos/](https://www.linkedin.com/in/constanzaramos/)
