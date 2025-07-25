@@ -18,6 +18,7 @@ git clone https://github.com/tu-usuario/fintech-landing.git
 cd fintech-landing
 npm install
 npm run dev
+````` 
 Abre [http://localhost:5173](http://localhost:5173) y ya puedes verlo andando.
 
 Este proyecto usa **Vite** para un arranque más rápido y eficiente.
